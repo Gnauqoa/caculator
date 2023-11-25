@@ -1,5 +1,5 @@
 import * as ScreenOrientation from "expo-screen-orientation";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   StatusBar,
   StyleSheet,
@@ -14,11 +14,7 @@ import {
 } from "react-native";
 import calculate from "../../utils/calculate";
 import Button from "../../components/Button";
-
-type HistoryRecord = {
-  expression: string;
-  result: string;
-};
+import { HistoryContext } from "../../context/history";
 
 const Row = ({ children }: { children: any }) => (
   <View style={styles.row}>{children}</View>
@@ -27,11 +23,13 @@ const Row = ({ children }: { children: any }) => (
 export default function App() {
   const [displayValue, setDisplayValue] = useState("0");
   const [mode, setMode] = useState(1);
-  const [history, setHistory] = useState<HistoryRecord[]>([]); // State variable to store the history
-  const [showHistory, setShowHistory] = useState(false); // State variable to control the visibility of the history modal
+  const { addHistory } = useContext(HistoryContext);
 
   const handleEqualsPress = () => {
-    setDisplayValue(calculate(displayValue).toString());
+    if (displayValue === "0") return;
+    const result = calculate(displayValue);
+    addHistory({ calculation: displayValue, result });
+    setDisplayValue(result.toString());
   };
 
   const handleClearPress = () => {
@@ -90,8 +88,8 @@ export default function App() {
             onChange={handleChange}
           />
           <Row>
-            <Button value="C" onPress={handleClearPress} />
-            <Button value="=" onPress={handleEqualsPress} />
+            <Button value="C" onPress={handleClearPress} style="secondary" />
+            <Button value="=" onPress={handleEqualsPress} style="accent" />
           </Row>
           <Row>
             <Button value="Copy" onPress={handleCopyPress} />
