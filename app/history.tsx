@@ -26,7 +26,7 @@ export default function ModalScreen() {
       />
       <HistoryHead />
       {calculationHistories.map((history, index) => (
-        <HistoryRow key={index} {...history} />
+        <HistoryRow isOdd={!!(index % 2)} key={index} {...history} />
       ))}
       <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
     </ScrollView>

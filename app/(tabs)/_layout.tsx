@@ -12,7 +12,7 @@ function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>["name"];
   color: string;
 }) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
+  return <FontAwesome size={20} style={{ marginBottom: -3 }} {...props} />;
 }
 
 export default function TabLayout() {
@@ -49,7 +49,9 @@ export default function TabLayout() {
         name="calculator"
         options={{
           title: "Calculator",
-          tabBarIcon: ({ color }) => <Entypo name="calculator" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <Entypo size={20} name="calculator" color={color} />
+          ),
           headerRight: () => (
             <Link href="/history" asChild>
               <Pressable>

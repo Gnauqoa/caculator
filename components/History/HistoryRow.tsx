@@ -3,7 +3,11 @@ import { HistoryType } from "../../context/history";
 import { AntDesign } from "@expo/vector-icons";
 import { useClipboard } from "../../hooks/useClipboard";
 
-const HistoryRow = ({ calculation, result }: HistoryType) => {
+const HistoryRow = ({
+  calculation,
+  result,
+  isOdd,
+}: HistoryType & { isOdd?: boolean }) => {
   const { copy } = useClipboard();
   return (
     <View style={{ flexDirection: "row" }}>
@@ -26,7 +30,7 @@ const HistoryRow = ({ calculation, result }: HistoryType) => {
           style={{
             fontSize: 18,
             textAlign: "center",
-            color: "white",
+            color: isOdd ? "white" : "#f09a36",
           }}
         >
           {calculation}
@@ -56,7 +60,7 @@ const HistoryRow = ({ calculation, result }: HistoryType) => {
           style={{
             fontSize: 18,
             textAlign: "center",
-            color: "white",
+            color: isOdd ? "white" : "#f09a36",
           }}
         >
           {result}
