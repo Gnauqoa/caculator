@@ -26,7 +26,7 @@ export default function App() {
   const [displayValue, setDisplayValue] = useState("");
   const [mode, setMode] = useState(1);
   const { addHistory } = useContext(HistoryContext);
-  const { copy, paste } = useClipboard();
+  const { copy } = useClipboard();
   const handleEqualsPress = () => {
     if (displayValue === "") return;
     const result = calculate(displayValue);
@@ -43,9 +43,6 @@ export default function App() {
     copy(displayValue);
   };
 
-  const handlePastePress = async () => {
-    await paste(setDisplayValue);
-  };
 
   const handleChange = (
     event: NativeSyntheticEvent<TextInputChangeEventData>

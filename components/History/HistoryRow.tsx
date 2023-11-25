@@ -15,6 +15,8 @@ const HistoryRow = ({ calculation, result }: HistoryType) => {
           paddingTop: 4,
           paddingBottom: 4,
           width: "50%",
+          paddingLeft: 10,
+          paddingRight: 10,
           gap: 12,
           justifyContent: "center",
           alignItems: "center",
@@ -29,9 +31,11 @@ const HistoryRow = ({ calculation, result }: HistoryType) => {
         >
           {calculation}
         </Text>
-        <TouchableOpacity onPress={() => copy(calculation)}>
-          <AntDesign name="copy1" size={14} color="white" />
-        </TouchableOpacity>
+        <View style={{ position: "relative", marginLeft: "auto" }}>
+          <TouchableOpacity onPress={() => copy(calculation)}>
+            <AntDesign name="copy1" size={14} color="white" />
+          </TouchableOpacity>
+        </View>
       </View>
       <View
         style={{
@@ -41,6 +45,8 @@ const HistoryRow = ({ calculation, result }: HistoryType) => {
           paddingTop: 4,
           paddingBottom: 4,
           width: "50%",
+          paddingLeft: 10,
+          paddingRight: 10,
           gap: 12,
           justifyContent: "center",
           alignItems: "center",
@@ -55,9 +61,11 @@ const HistoryRow = ({ calculation, result }: HistoryType) => {
         >
           {result}
         </Text>
-        <TouchableOpacity onPress={() => copy(result.toString())}>
-          <AntDesign name="copy1" size={14} color="white" />
-        </TouchableOpacity>
+        <View style={{ position: "relative", marginLeft: "auto" }}>
+          <TouchableOpacity onPress={() => copy(result.toString())}>
+            <AntDesign name="copy1" size={14} color="white" />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
