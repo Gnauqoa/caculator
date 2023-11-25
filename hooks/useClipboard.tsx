@@ -1,12 +1,12 @@
-import Clipboard from "@react-native-clipboard/clipboard";
+import * as Clipboard from "expo-clipboard";
 
 export const useClipboard = () => {
-  const copyToClipboard = (text: string) => {
-    Clipboard.setString(text);
+  const copyToClipboard = async (text: string) => {
+    if (Clipboard) await Clipboard.setStringAsync(text);
   };
 
   const pasteFromClipboard = async (callback: (text: string) => void) => {
-    const content = await Clipboard.getString();
+    const content = await Clipboard.getStringAsync();
     callback(content);
   };
 
