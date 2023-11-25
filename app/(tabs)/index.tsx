@@ -48,7 +48,7 @@ export default function App() {
     event: NativeSyntheticEvent<TextInputChangeEventData>
   ) => {
     const input = event.nativeEvent.text;
-    const validInput =  input.replace(/[^0-9+\-*/%÷.×]/g, "");
+    const validInput =  input.replace(/[^0-9+\-*/%÷ .×]/g, "");
     setDisplayValue(validInput);
   };
 
