@@ -29,7 +29,7 @@ export default function App() {
   const { copy } = useClipboard();
   const handleEqualsPress = () => {
     if (displayValue === "") return;
-    const result = calculate(displayValue);
+    const result = eval(displayValue);
     if (result.toString() === displayValue) return;
     addHistory({ calculation: displayValue, result });
     setDisplayValue(result.toString());
@@ -48,7 +48,7 @@ export default function App() {
     event: NativeSyntheticEvent<TextInputChangeEventData>
   ) => {
     const input = event.nativeEvent.text;
-    const validInput = input.replace(/[^0-9+\-*/%÷×]/g, "");
+    const validInput =  input.replace(/[^0-9+\-*/%÷.×]/g, "");
     setDisplayValue(validInput);
   };
 
