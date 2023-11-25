@@ -21,14 +21,17 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        
+        tabBarActiveTintColor: "#f09a36",
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
           title: "Converter",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name="code" color={focused ? "#f09a36" : color} />
+          ),
           headerRight: () => (
             <Link href="/history" asChild>
               <Pressable>
@@ -49,9 +52,14 @@ export default function TabLayout() {
         name="calculator"
         options={{
           title: "Calculator",
-          tabBarIcon: ({ color }) => (
-            <Entypo size={20} name="calculator" color={color} />
+          tabBarIcon: ({ color, focused }) => (
+            <Entypo
+              size={20}
+              name="calculator"
+              color={focused ? "#f09a36" : color}
+            />
           ),
+          tabBarActiveTintColor: "#f09a36",
           headerRight: () => (
             <Link href="/history" asChild>
               <Pressable>
