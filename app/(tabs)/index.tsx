@@ -5,7 +5,6 @@ import {
   StyleSheet,
   View,
   SafeAreaView,
-  Clipboard,
   TextInput,
   NativeSyntheticEvent,
   TextInputChangeEventData,
@@ -15,6 +14,7 @@ import {
 import calculate from "../../utils/calculate";
 import Button from "../../components/Button";
 import { HistoryContext } from "../../context/history";
+import { useClipboard } from "../../hooks/useClipboard";
 
 const Row = ({ children }: { children: any }) => (
   <View style={styles.row}>{children}</View>
@@ -24,10 +24,11 @@ export default function App() {
   const [displayValue, setDisplayValue] = useState("");
   const [mode, setMode] = useState(1);
   const { addHistory } = useContext(HistoryContext);
-
+  const { copy, paste } = useClipboard();
   const handleEqualsPress = () => {
     if (displayValue === "") return;
     const result = calculate(displayValue);
+    if (result.toString() === displayValue) return;
     addHistory({ calculation: displayValue, result });
     setDisplayValue(result.toString());
   };
@@ -37,12 +38,11 @@ export default function App() {
   };
 
   const handleCopyPress = () => {
-    Clipboard.setString(displayValue);
+    copy(displayValue);
   };
 
   const handlePastePress = async () => {
-    const clipboardContent = await Clipboard.getString();
-    setDisplayValue(clipboardContent);
+    await paste(setDisplayValue);
   };
 
   const handleChange = (
