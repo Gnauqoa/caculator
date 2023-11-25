@@ -5,7 +5,6 @@ import {
   StyleSheet,
   View,
   SafeAreaView,
-  Text,
   Clipboard,
   TextInput,
   NativeSyntheticEvent,
