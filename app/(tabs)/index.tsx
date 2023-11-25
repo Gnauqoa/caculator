@@ -1,5 +1,5 @@
 import * as ScreenOrientation from "expo-screen-orientation";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import {
   StatusBar,
   StyleSheet,
@@ -11,12 +11,11 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import calculate from "../../utils/calculate";
 import Button from "../../components/Button";
-import { HistoryContext } from "../../context/history";
 import { useClipboard } from "../../hooks/useClipboard";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
+import useHistory from "../../hooks/useHistory";
 
 const Row = ({ children }: { children: any }) => (
   <View style={styles.row}>{children}</View>
@@ -25,7 +24,7 @@ const Row = ({ children }: { children: any }) => (
 export default function App() {
   const [displayValue, setDisplayValue] = useState("");
   const [mode, setMode] = useState(1);
-  const { addHistory } = useContext(HistoryContext);
+  const { addHistory } = useHistory();
   const { copy } = useClipboard();
   const handleEqualsPress = () => {
     if (displayValue === "") return;
@@ -43,12 +42,11 @@ export default function App() {
     copy(displayValue);
   };
 
-
   const handleChange = (
     event: NativeSyntheticEvent<TextInputChangeEventData>
   ) => {
     const input = event.nativeEvent.text;
-    const validInput =  input.replace(/[^0-9+\-*/%÷ .×]/g, "");
+    const validInput = input.replace(/[^0-9+\-*/%÷ .×]/g, "");
     setDisplayValue(validInput);
   };
 

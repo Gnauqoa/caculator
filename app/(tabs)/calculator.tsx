@@ -1,10 +1,10 @@
 import * as ScreenOrientation from "expo-screen-orientation";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, SafeAreaView, Text, Clipboard } from "react-native";
+import { StyleSheet, View, SafeAreaView, Text } from "react-native";
 import Button from "../../components/Button";
 import { useClipboard } from "../../hooks/useClipboard";
-import { HistoryContext } from "../../context/history";
+import useHistory from "../../hooks/useHistory";
 
 const Row = ({ children }: { children: any }) => (
   <View style={styles.row}>{children}</View>
@@ -14,7 +14,7 @@ export default function Calculator() {
   const [displayValue, setDisplayValue] = useState("0");
   const [operator, setOperator] = useState("");
   const [storedValue, setStoredValue] = useState("");
-  const { addHistory } = useContext(HistoryContext);
+  const { addHistory } = useHistory();
   const [mode, setMode] = useState(1);
   const { copy, paste } = useClipboard();
   const handleNumberPress = (value: string) => {
