@@ -15,6 +15,8 @@ import calculate from "../../utils/calculate";
 import Button from "../../components/Button";
 import { HistoryContext } from "../../context/history";
 import { useClipboard } from "../../hooks/useClipboard";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { AntDesign } from "@expo/vector-icons";
 
 const Row = ({ children }: { children: any }) => (
   <View style={styles.row}>{children}</View>
@@ -82,18 +84,34 @@ export default function App() {
       >
         <StatusBar />
         <SafeAreaView style={{ width: "100%" }}>
-          <TextInput
-            style={styles.computedValue}
-            value={displayValue}
-            onChange={handleChange}
-          />
+          <View style={{ position: "relative", width: "100%" }}>
+            <TextInput
+              style={{
+                color: "#fff",
+                width: "100%",
+                fontSize: 40,
+                textAlign: "center",
+                zIndex: 10,
+              }}
+              value={displayValue}
+              onChange={handleChange}
+            />
+            <View
+              style={{
+                zIndex: 20,
+                position: "absolute",
+                right: 10,
+                top: 10,
+              }}
+            >
+              <TouchableOpacity onPress={handleCopyPress}>
+                <AntDesign name="copy1" size={18} color="white" />
+              </TouchableOpacity>
+            </View>
+          </View>
           <Row>
             <Button value="C" onPress={handleClearPress} style="secondary" />
             <Button value="=" onPress={handleEqualsPress} style="accent" />
-          </Row>
-          <Row>
-            <Button value="Copy" onPress={handleCopyPress} />
-            <Button value="Paste" onPress={handlePastePress} />
           </Row>
         </SafeAreaView>
       </View>
@@ -115,6 +133,7 @@ const styles = StyleSheet.create({
   },
   computedValue: {
     color: "#fff",
+    width: "100%",
     fontSize: 40,
     textAlign: "center",
   },
