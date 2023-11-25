@@ -21,19 +21,19 @@ const Row = ({ children }: { children: any }) => (
 );
 
 export default function App() {
-  const [displayValue, setDisplayValue] = useState("0");
+  const [displayValue, setDisplayValue] = useState("");
   const [mode, setMode] = useState(1);
   const { addHistory } = useContext(HistoryContext);
 
   const handleEqualsPress = () => {
-    if (displayValue === "0") return;
+    if (displayValue === "") return;
     const result = calculate(displayValue);
     addHistory({ calculation: displayValue, result });
     setDisplayValue(result.toString());
   };
 
   const handleClearPress = () => {
-    setDisplayValue("0");
+    setDisplayValue("");
   };
 
   const handleCopyPress = () => {
