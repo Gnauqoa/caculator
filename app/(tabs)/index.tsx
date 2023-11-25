@@ -1,31 +1,132 @@
-import { StyleSheet } from 'react-native';
+import * as ScreenOrientation from "expo-screen-orientation";
+import React, { useState } from "react";
+import {
+  StatusBar,
+  StyleSheet,
+  View,
+  SafeAreaView,
+  Text,
+  Clipboard,
+  TextInput,
+  NativeSyntheticEvent,
+  TextInputChangeEventData,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
+import calculate from "../../utils/calculate";
+import Button from "../../components/Button";
 
-import EditScreenInfo from '../../components/EditScreenInfo';
-import { Text, View } from '../../components/Themed';
+type HistoryRecord = {
+  expression: string;
+  result: string;
+};
 
-export default function TabOneScreen() {
+const Row = ({ children }: { children: any }) => (
+  <View style={styles.row}>{children}</View>
+);
+
+export default function App() {
+  const [displayValue, setDisplayValue] = useState("0");
+  const [mode, setMode] = useState(1);
+  const [history, setHistory] = useState<HistoryRecord[]>([]); // State variable to store the history
+  const [showHistory, setShowHistory] = useState(false); // State variable to control the visibility of the history modal
+
+  const handleEqualsPress = () => {
+    setDisplayValue(calculate(displayValue).toString());
+  };
+
+  const handleClearPress = () => {
+    setDisplayValue("0");
+  };
+
+  const handleCopyPress = () => {
+    Clipboard.setString(displayValue);
+  };
+
+  const handlePastePress = async () => {
+    const clipboardContent = await Clipboard.getString();
+    setDisplayValue(clipboardContent);
+  };
+
+  const handleChange = (
+    event: NativeSyntheticEvent<TextInputChangeEventData>
+  ) => {
+    const input = event.nativeEvent.text;
+    const validInput = input.replace(/[^0-9+\-*/%÷×]/g, "");
+    setDisplayValue(validInput);
+  };
+
+  const handleLandscapeMode = async () => {
+    const mode = await ScreenOrientation.getOrientationAsync();
+    if (mode === ScreenOrientation.Orientation.PORTRAIT_UP) {
+      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
+      setMode(0);
+    } else {
+      ScreenOrientation.lockAsync(
+        ScreenOrientation.OrientationLock.PORTRAIT_UP
+      );
+      setMode(1);
+    }
+  };
+
+  const handleScreenPress = () => {
+    Keyboard.dismiss();
+  };
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
-    </View>
+    <TouchableWithoutFeedback onPress={handleScreenPress}>
+      <View
+        style={[
+          styles.container,
+          mode !== ScreenOrientation.Orientation.PORTRAIT_UP
+            ? styles.containerLandscape
+            : null,
+        ]}
+      >
+        <StatusBar />
+        <SafeAreaView style={{ width: "100%" }}>
+          <TextInput
+            style={styles.computedValue}
+            value={displayValue}
+            onChange={handleChange}
+          />
+          <Row>
+            <Button value="C" onPress={handleClearPress} />
+            <Button value="=" onPress={handleEqualsPress} />
+          </Row>
+          <Row>
+            <Button value="Copy" onPress={handleCopyPress} />
+            <Button value="Paste" onPress={handlePastePress} />
+          </Row>
+        </SafeAreaView>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: 20,
+    backgroundColor: "#202020",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  containerLandscape: {
+    flexDirection: "row",
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  computedValue: {
+    color: "#fff",
+    fontSize: 40,
+    textAlign: "center",
+  },
+  row: {
+    flexDirection: "row",
+  },
+  btnText: {
+    color: "#fff",
+    fontSize: 25,
+    fontWeight: "500",
   },
 });
