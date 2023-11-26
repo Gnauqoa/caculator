@@ -33,17 +33,17 @@ export default function Portrait() {
         <Row>
           <Button value="C" style="secondary" onPress={handleClearPress} />
           <Button
-            value="+/-"
+            value={Operator.ToggleSign}
             style="secondary"
             onPress={() => handleOperatorPress(Operator.ToggleSign)}
           />
           <Button
-            value="%"
+            value={Operator.Division100}
             style="secondary"
             onPress={() => handleOperatorPress(Operator.Division100)}
           />
           <Button
-            value="/"
+            value={Operator.Division}
             style="accent"
             onPress={() => handleOperatorPress(Operator.Division)}
           />
@@ -53,7 +53,7 @@ export default function Portrait() {
           <Button value="8" onPress={() => handleNumberPress("8")} />
           <Button value="9" onPress={() => handleNumberPress("9")} />
           <Button
-            value="x"
+            value={Operator.Multiplication}
             style="accent"
             onPress={() => handleOperatorPress(Operator.Multiplication)}
           />
@@ -63,7 +63,7 @@ export default function Portrait() {
           <Button value="5" onPress={() => handleNumberPress("5")} />
           <Button value="6" onPress={() => handleNumberPress("6")} />
           <Button
-            value="-"
+            value={Operator.Subtraction}
             style="accent"
             onPress={() => handleOperatorPress(Operator.Subtraction)}
           />
@@ -73,7 +73,7 @@ export default function Portrait() {
           <Button value="2" onPress={() => handleNumberPress("2")} />
           <Button value="3" onPress={() => handleNumberPress("3")} />
           <Button
-            value="+"
+            value={Operator.Addition}
             style="accent"
             onPress={() => handleOperatorPress(Operator.Addition)}
           />
