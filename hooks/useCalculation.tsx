@@ -13,7 +13,7 @@ export enum Operator {
 }
 
 const useCalculation = () => {
-  const [display, setDisplay] = useState("");
+  const [display, setDisplay] = useState("0");
   const [operator, setOperator] = useState<Operator>(Operator.Empty);
   const [storedValue, setStoredValue] = useState("");
   const { addHistory } = useHistory();
