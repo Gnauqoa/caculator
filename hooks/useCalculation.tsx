@@ -7,11 +7,14 @@ export enum Operator {
   Subtraction = "-",
   Multiplication = "x",
   Division = "/",
+  Division100 = "%",
+  ToggleSign = "+/-",
+  Empty = "",
 }
 
 const useCalculation = () => {
   const [display, setDisplay] = useState("");
-  const [operator, setOperator] = useState("");
+  const [operator, setOperator] = useState<Operator>(Operator.Empty);
   const [storedValue, setStoredValue] = useState("");
   const { addHistory } = useHistory();
   const { copy, paste } = useClipboard();
@@ -36,17 +39,19 @@ const useCalculation = () => {
     }
   };
 
-  const handleOperatorPress = (value: string) => {
-    if (value === "%") {
+  const handleOperatorPress = (value: Operator) => {
+    if (value === Operator.Division100) {
       const currentValue = parseFloat(display);
       const result = currentValue / 100;
       setDisplay(result.toString());
-    } else if (value === "+/-") {
+    } else if (value === Operator.ToggleSign) {
       setDisplay((parseFloat(display) * -1).toString());
     } else {
       setOperator(value);
-      setStoredValue(display);
-      setDisplay("0");
+      if (operator === Operator.Empty) {
+        setStoredValue(display);
+        setDisplay("0");
+      }
     }
   };
 
@@ -55,16 +60,16 @@ const useCalculation = () => {
     const storedValueFloat = parseFloat(storedValue);
     let result = 0;
     switch (operator) {
-      case "+":
+      case Operator.Addition:
         result = storedValueFloat + currentValue;
         break;
-      case "-":
+      case Operator.Subtraction:
         result = storedValueFloat - currentValue;
         break;
-      case "x":
+      case Operator.Multiplication:
         result = storedValueFloat * currentValue;
         break;
-      case "/":
+      case Operator.Division:
         result = storedValueFloat / currentValue;
         break;
       default:
@@ -75,19 +80,23 @@ const useCalculation = () => {
       result,
     });
     setDisplay(result.toString());
-    setOperator("");
+    setOperator(Operator.Empty);
     setStoredValue("");
   };
 
   const handleClearPress = () => {
     setDisplay("0");
-    setOperator("");
+    setOperator(Operator.Empty);
     setStoredValue("");
   };
 
   return {
     display:
-      operator === "" ? display : display !== "0" ? display : storedValue,
+      operator === Operator.Empty
+        ? display
+        : display !== "0"
+        ? display
+        : storedValue,
     operator,
     handleCopy,
     handlePaste,
