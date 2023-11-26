@@ -3,48 +3,48 @@ import useHistory from "./useHistory";
 import { useClipboard } from "./useClipboard";
 
 const useCalculation = () => {
-  const [calculation, setCalculation] = useState("");
+  const [display, setDisplay] = useState("");
   const [operator, setOperator] = useState("");
   const [storedValue, setStoredValue] = useState("");
   const { addHistory } = useHistory();
   const { copy, paste } = useClipboard();
 
-  const handleCopy = () => copy(calculation);
-  const handlePaste = () => paste(setCalculation);
+  const handleCopy = () => copy(display);
+  const handlePaste = () => paste(setDisplay);
 
   const handleNumberPress = (value: string) => {
-    if (calculation === "0") {
-      setCalculation(value);
+    if (display === "0") {
+      setDisplay(value);
     } else {
-      setCalculation(calculation + value);
+      setDisplay(display + value);
     }
-    if (parseFloat(calculation) < 0) {
-      setCalculation("-" + calculation);
+    if (parseFloat(display) < 0) {
+      setDisplay("-" + display);
     }
   };
 
   const handleDecimalPress = () => {
-    if (!calculation.includes(".")) {
-      setCalculation(calculation + ".");
+    if (!display.includes(".")) {
+      setDisplay(display + ".");
     }
   };
 
   const handleOperatorPress = (value: string) => {
     if (value === "%") {
-      const currentValue = parseFloat(calculation);
+      const currentValue = parseFloat(display);
       const result = currentValue / 100;
-      setCalculation(result.toString());
+      setDisplay(result.toString());
     } else if (value === "+/-") {
-      setCalculation((parseFloat(calculation) * -1).toString());
+      setDisplay((parseFloat(display) * -1).toString());
     } else {
       setOperator(value);
-      setStoredValue(calculation);
-      setCalculation("0");
+      setStoredValue(display);
+      setDisplay("0");
     }
   };
 
   const handleEqualsPress = () => {
-    const currentValue = parseFloat(calculation);
+    const currentValue = parseFloat(display);
     const storedValueFloat = parseFloat(storedValue);
     let result = 0;
     switch (operator) {
@@ -67,19 +67,21 @@ const useCalculation = () => {
       calculation: `${storedValue}${operator}${currentValue}`,
       result,
     });
-    setCalculation(result.toString());
+    setDisplay(result.toString());
     setOperator("");
     setStoredValue("");
   };
 
   const handleClearPress = () => {
-    setCalculation("0");
+    setDisplay("0");
     setOperator("");
     setStoredValue("");
   };
 
   return {
-    calculation,
+    display:
+      operator === "" ? display : display !== "0" ? display : storedValue,
+    operator,
     handleCopy,
     handlePaste,
     handleNumberPress,
