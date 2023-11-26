@@ -50,19 +50,6 @@ export default function App() {
     setDisplayValue(validInput);
   };
 
-  const handleLandscapeMode = async () => {
-    const mode = await ScreenOrientation.getOrientationAsync();
-    if (mode === ScreenOrientation.Orientation.PORTRAIT_UP) {
-      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
-      setMode(0);
-    } else {
-      ScreenOrientation.lockAsync(
-        ScreenOrientation.OrientationLock.PORTRAIT_UP
-      );
-      setMode(1);
-    }
-  };
-
   const handleScreenPress = () => {
     Keyboard.dismiss();
   };

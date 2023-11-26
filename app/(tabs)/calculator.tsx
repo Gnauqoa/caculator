@@ -5,6 +5,7 @@ import { StyleSheet, View, SafeAreaView, Text } from "react-native";
 import Button from "../../components/Button";
 import { useClipboard } from "../../hooks/useClipboard";
 import useHistory from "../../hooks/useHistory";
+import userScreenOrientation from "../../hooks/useScreenOrientation";
 
 const Row = ({ children }: { children: any }) => (
   <View style={styles.row}>{children}</View>
@@ -15,8 +16,8 @@ export default function Calculator() {
   const [operator, setOperator] = useState("");
   const [storedValue, setStoredValue] = useState("");
   const { addHistory } = useHistory();
-  const [mode, setMode] = useState(1);
   const { copy, paste } = useClipboard();
+  const { isLandscape, handleToggle } = userScreenOrientation();
   const handleNumberPress = (value: string) => {
     if (displayValue === "0") {
       setDisplayValue(value);
@@ -83,28 +84,9 @@ export default function Calculator() {
     setStoredValue("");
   };
 
-  const handleLandscapeMode = async () => {
-    const mode = await ScreenOrientation.getOrientationAsync();
-    if (mode === ScreenOrientation.Orientation.PORTRAIT_UP) {
-      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
-
-      setMode(0);
-    } else {
-      ScreenOrientation.lockAsync(
-        ScreenOrientation.OrientationLock.PORTRAIT_UP
-      );
-      setMode(1);
-    }
-  };
-
   return (
     <View
-      style={[
-        styles.container,
-        mode !== ScreenOrientation.Orientation.PORTRAIT_UP
-          ? styles.containerLandscape
-          : null,
-      ]}
+      style={[styles.container, isLandscape ? null : styles.containerLandscape]}
     >
       <StatusBar style="light" />
       <SafeAreaView style={{ width: "100%" }}>
@@ -169,12 +151,8 @@ export default function Calculator() {
         </Row>
         <Row>
           <Button
-            value={
-              mode === ScreenOrientation.Orientation.PORTRAIT_UP
-                ? "Portrait"
-                : "Landscape"
-            }
-            onPress={handleLandscapeMode}
+            value={isLandscape ? "Landscape" : "Portrait"}
+            onPress={handleToggle}
           />
         </Row>
       </SafeAreaView>
