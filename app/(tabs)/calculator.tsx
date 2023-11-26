@@ -1,7 +1,7 @@
 import * as ScreenOrientation from "expo-screen-orientation";
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, SafeAreaView, Text } from "react-native";
+import { StyleSheet, View, SafeAreaView, Text, ScrollView } from "react-native";
 import Button from "../../components/Button";
 import { useClipboard } from "../../hooks/useClipboard";
 import useHistory from "../../hooks/useHistory";
@@ -85,7 +85,7 @@ export default function Calculator() {
   };
 
   return (
-    <View
+    <ScrollView
       style={[styles.container, isLandscape ? null : styles.containerLandscape]}
     >
       <StatusBar style="light" />
@@ -156,7 +156,7 @@ export default function Calculator() {
           />
         </Row>
       </SafeAreaView>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -166,7 +166,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#202020",
-    // justifyContent: "flex-end",
     flexDirection: "column",
   },
   containerLandscape: {
