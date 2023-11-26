@@ -13,6 +13,7 @@ export enum Operator {
   Sin = "sin",
   Cos = "cos",
   Tan = "tan",
+  Power = "x^y",
 }
 
 const useCalculation = () => {
@@ -47,8 +48,17 @@ const useCalculation = () => {
       const currentValue = parseFloat(display);
       const result = currentValue / 100;
       setDisplay(result.toString());
+      addHistory({
+        calculation: `${display}%}`,
+        result: result,
+      });
     } else if (value === Operator.ToggleSign) {
-      setDisplay((parseFloat(display) * -1).toString());
+      const result = parseFloat(display) * -1;
+      setDisplay(result.toString());
+      addHistory({
+        calculation: `-${display}`,
+        result,
+      });
     } else {
       setOperator(value);
       if (operator === Operator.Empty) {
@@ -62,7 +72,8 @@ const useCalculation = () => {
     const currentValue = parseFloat(display);
     const storedValueFloat = parseFloat(storedValue);
     let result = 0;
-    switch (operator) {
+    let c_operator: string = operator;
+    switch (c_operator) {
       case Operator.Addition:
         result = storedValueFloat + currentValue;
         break;
@@ -75,11 +86,15 @@ const useCalculation = () => {
       case Operator.Division:
         result = storedValueFloat / currentValue;
         break;
+      case Operator.Power:
+        result = Math.pow(storedValueFloat, currentValue);
+        c_operator = "^";
+        break;
       default:
         break;
     }
     addHistory({
-      calculation: `${storedValue}${operator}${currentValue}`,
+      calculation: `${storedValue} ${c_operator} ${currentValue}`,
       result,
     });
     setDisplay(result.toString());
@@ -108,66 +123,82 @@ const useCalculation = () => {
       default:
         break;
     }
+    addHistory({
+      calculation: `${trigFunction.toLocaleLowerCase()}(${currentValue})`,
+      result,
+    });
     setDisplay(result.toString());
   };
 
   const handleLogPress = () => {
     const currentValue = parseFloat(display);
     const result = Math.log10(currentValue);
+    addHistory({ calculation: `log(${currentValue})`, result });
     setDisplay(result.toString());
   };
 
   const handleLnPress = () => {
     const currentValue = parseFloat(display);
     const result = Math.log(currentValue);
+    addHistory({ calculation: `ln(${currentValue})`, result });
     setDisplay(result.toString());
   };
 
   const handleInversePress = () => {
     const currentValue = parseFloat(display);
     const result = 1 / currentValue;
+    addHistory({ calculation: `1/${currentValue}`, result });
     setDisplay(result.toString());
   };
 
   const handleExponentialPress = () => {
     const currentValue = parseFloat(display);
     const result = Math.exp(currentValue);
+    addHistory({ calculation: `e^${currentValue}`, result });
     setDisplay(result.toString());
   };
 
   const handleSquarePress = () => {
     const currentValue = parseFloat(display);
     const result = Math.pow(currentValue, 2);
+    addHistory({ calculation: `${currentValue}^2`, result });
     setDisplay(result.toString());
   };
 
   const handlePowerPress = () => {
-    const currentValue = parseFloat(display);
-    const result = Math.pow(currentValue, parseFloat(storedValue));
-    setDisplay(result.toString());
+    handleOperatorPress(Operator.Power);
   };
   const handleAbsolutePress = () => {
     const currentValue = parseFloat(display);
     const result = Math.abs(currentValue);
+    addHistory({ calculation: `abs(${currentValue})`, result });
     setDisplay(result.toString());
   };
 
   const handlePiPress = () => {
+    addHistory({ calculation: Math.PI.toString(), result: Math.PI });
     setDisplay(Math.PI.toString());
   };
 
   const handleEPress = () => {
+    addHistory({ calculation: Math.E.toString(), result: Math.E });
     setDisplay(Math.E.toString());
   };
   const handleRadPress = () => {
     const currentValue = parseFloat(display);
     const result = currentValue * (Math.PI / 180); // Convert degrees to radians
+    addHistory({ calculation: `${currentValue}°`, result });
     setDisplay(result.toString());
   };
 
   const handleSquareRootPress = () => {
     const currentValue = parseFloat(display);
     const result = Math.sqrt(currentValue);
+
+    addHistory({
+      calculation: `√(${currentValue})`,
+      result,
+    });
     setDisplay(result.toString());
   };
 

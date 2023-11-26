@@ -5,10 +5,11 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { SplashScreen, Stack } from "expo-router";
+import { Link, SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
-import { useColorScheme } from "react-native";
+import { TouchableOpacity, useColorScheme } from "react-native";
 import ContextProvider from "../context";
+import { AntDesign } from "@expo/vector-icons";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -55,7 +56,19 @@ function RootLayoutNav() {
       <ContextProvider>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="History" options={{ presentation: "modal" }} />
+          <Stack.Screen
+            name="History"
+            options={{
+              headerLeft: () => (
+                <TouchableOpacity>
+                  <Link href="../">
+                    <AntDesign name="back" size={25} color="white" />
+                  </Link>
+                </TouchableOpacity>
+              ),
+              presentation: "modal",
+            }}
+          />
         </Stack>
       </ContextProvider>
     </ThemeProvider>

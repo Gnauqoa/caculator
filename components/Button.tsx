@@ -2,13 +2,13 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Operator } from "../hooks/useCalculation";
 
-interface IButton {
+export interface ButtonProps {
   value: string;
   style?: "secondary" | "accent" | "double";
   operator?: Operator;
   onPress: () => void;
 }
-const Button = ({ operator, value, style, onPress }: IButton) => {
+const Button = ({ operator, value, style, onPress }: ButtonProps) => {
   const btnStyles: any[] = [styles.btn, { flex: 1, height: "100%" }];
   const txtStyles: any[] = [styles.btnText];
   if (style === "secondary") {
