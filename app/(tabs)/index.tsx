@@ -18,12 +18,11 @@ import useHistory from "../../hooks/useHistory";
 import { StatusBar } from "expo-status-bar";
 
 const Row = ({ children }: { children: any }) => (
-  <View style={styles.row}>{children}</View>
+  <View style={{ flex: 1, flexDirection: "row", gap: 4 }}>{children}</View>
 );
 
 export default function App() {
   const [displayValue, setDisplayValue] = useState("");
-  const [mode, setMode] = useState(1);
   const { addHistory } = useHistory();
   const { copy } = useClipboard();
   const handleEqualsPress = () => {
@@ -57,74 +56,49 @@ export default function App() {
   return (
     <TouchableWithoutFeedback onPress={handleScreenPress}>
       <View
-        style={[
-          styles.container,
-          mode !== ScreenOrientation.Orientation.PORTRAIT_UP
-            ? styles.containerLandscape
-            : null,
-        ]}
+        style={{
+          flex: 1,
+          paddingTop: 20,
+          backgroundColor: "#202020",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 12,
+        }}
       >
         <StatusBar style="dark" />
-        <SafeAreaView style={{ width: "100%" }}>
-          <View style={{ position: "relative", width: "100%" }}>
-            <TextInput
-              style={{
-                color: "#fff",
-                width: "100%",
-                fontSize: 40,
-                textAlign: "center",
-                zIndex: 10,
-              }}
-              value={displayValue}
-              onChange={handleChange}
-            />
-            <View
-              style={{
-                zIndex: 20,
-                position: "absolute",
-                right: 10,
-                top: 10,
-              }}
-            >
-              <TouchableOpacity onPress={handleCopyPress}>
-                <AntDesign name="copy1" size={18} color="white" />
-              </TouchableOpacity>
-            </View>
+        <View style={{ position: "relative", width: "100%" }}>
+          <TextInput
+            style={{
+              color: "#fff",
+              width: "100%",
+              fontSize: 40,
+              textAlign: "center",
+              zIndex: 10,
+            }}
+            value={displayValue}
+            onChange={handleChange}
+          />
+          <View
+            style={{
+              zIndex: 20,
+              position: "absolute",
+              left: 10,
+              top: 0,
+            }}
+          >
+            <TouchableOpacity onPress={handleCopyPress}>
+              <AntDesign name="copy1" size={18} color="white" />
+            </TouchableOpacity>
           </View>
+        </View>
+        <View style={{ height: "10%", width: "100%" }}>
           <Row>
             <Button value="C" onPress={handleClearPress} style="secondary" />
             <Button value="=" onPress={handleEqualsPress} style="accent" />
           </Row>
-        </SafeAreaView>
+        </View>
       </View>
     </TouchableWithoutFeedback>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 20,
-    backgroundColor: "#202020",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  containerLandscape: {
-    flexDirection: "row",
-  },
-  computedValue: {
-    color: "#fff",
-    width: "100%",
-    fontSize: 40,
-    textAlign: "center",
-  },
-  row: {
-    flexDirection: "row",
-  },
-  btnText: {
-    color: "#fff",
-    fontSize: 25,
-    fontWeight: "500",
-  },
-});

@@ -1,8 +1,9 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import Button from "../../../components/Button";
 import useCalculation, { Operator } from "../../../hooks/useCalculation";
+import { AntDesign } from "@expo/vector-icons";
 
 const Row = ({ children }: { children: any }) => (
   <View style={{ flex: 1, flexDirection: "row", gap: 4 }}>{children}</View>
@@ -17,6 +18,7 @@ export default function Portrait() {
     handleNumberPress,
     handlePaste,
     handleOperatorPress,
+    handleCopy,
   } = useCalculation();
 
   return (
@@ -30,17 +32,36 @@ export default function Portrait() {
       }}
     >
       <StatusBar style="dark" />
-      <Text
+      <View
         style={{
           paddingBottom: 20,
-          color: "#fff",
-          fontSize: 40,
-          textAlign: "right",
           paddingRight: 20,
+          position: "relative",
+          width: "100%",
         }}
       >
-        {display}
-      </Text>
+        <Text
+          style={{
+            color: "#fff",
+            fontSize: 40,
+            textAlign: "right",
+          }}
+        >
+          {display}
+        </Text>
+        <View
+          style={{
+            zIndex: 20,
+            position: "absolute",
+            left: 10,
+            top: 0,
+          }}
+        >
+          <TouchableOpacity onPress={handleCopy}>
+            <AntDesign name="copy1" size={18} color="white" />
+          </TouchableOpacity>
+        </View>
+      </View>
 
       <Row>
         <Button value="C" style="secondary" onPress={handleClearPress} />
