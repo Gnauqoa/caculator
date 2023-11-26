@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { ScreenOrientationContext } from "../context/screenOrientation";
 
-const userScreenOrientation = () => {
+const useScreenOrientation = () => {
   return useContext(ScreenOrientationContext);
 };
 
-export default userScreenOrientation;
+export default useScreenOrientation;

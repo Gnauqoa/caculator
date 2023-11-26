@@ -5,7 +5,7 @@ import { StyleSheet, View, SafeAreaView, Text } from "react-native";
 import Button from "../../components/Button";
 import { useClipboard } from "../../hooks/useClipboard";
 import useHistory from "../../hooks/useHistory";
-import userScreenOrientation from "../../hooks/useScreenOrientation";
+import useScreenOrientation from "../../hooks/useScreenOrientation";
 
 const Row = ({ children }: { children: any }) => (
   <View style={styles.row}>{children}</View>
@@ -17,7 +17,7 @@ export default function Calculator() {
   const [storedValue, setStoredValue] = useState("");
   const { addHistory } = useHistory();
   const { copy, paste } = useClipboard();
-  const { isLandscape, handleToggle } = userScreenOrientation();
+  const { isLandscape, handleToggle } = useScreenOrientation();
   const handleNumberPress = (value: string) => {
     if (displayValue === "0") {
       setDisplayValue(value);
