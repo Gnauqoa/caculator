@@ -25,7 +25,12 @@ const useCalculation = () => {
 
   const handleCopy = () => copy(display);
   const handlePaste = () => paste(setDisplay);
-
+  const handleCubeRootPress = () => {
+    const currentValue = parseFloat(display);
+    const result = Math.cbrt(currentValue);
+    addHistory({ calculation: `∛(${currentValue})`, result });
+    setDisplay(result.toString());
+  };
   const handleNumberPress = (value: string) => {
     if (display === "0") {
       setDisplay(value);
@@ -227,6 +232,7 @@ const useCalculation = () => {
     handleAbsolutePress,
     handlePiPress,
     handleEPress,
+    handleCubeRootPress,
     handleRadPress,
     handleSquareRootPress,
   };

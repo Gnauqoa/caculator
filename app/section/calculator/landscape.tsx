@@ -27,6 +27,7 @@ const Landscape = () => {
     handleEPress,
     handleRadPress,
     handleSquareRootPress,
+    handleCubeRootPress,
     operator,
   } = useCalculation();
   const render: ButtonProps[][] = [
@@ -35,6 +36,11 @@ const Landscape = () => {
         operator: operator,
         value: "rad",
         onPress: handleRadPress,
+      },
+      {
+        operator: operator,
+        value: "∛",
+        onPress: handleCubeRootPress,
       },
       {
         operator: operator,
@@ -113,12 +119,12 @@ const Landscape = () => {
       {
         operator: operator,
         value: "log",
-        onPress: handleLogPress
+        onPress: handleLogPress,
       },
       {
         operator: operator,
         value: "1/x",
-        onPress: handleInversePress
+        onPress: handleInversePress,
       },
       {
         operator: operator,
@@ -151,12 +157,12 @@ const Landscape = () => {
       {
         operator: operator,
         value: "x^2",
-        onPress: handleSquarePress
+        onPress: handleSquarePress,
       },
       {
         operator: operator,
         value: "x^y",
-        onPress: handlePowerPress
+        onPress: handlePowerPress,
       },
       {
         operator: operator,
@@ -189,12 +195,12 @@ const Landscape = () => {
       {
         operator: operator,
         value: "π",
-        onPress: handlePiPress
+        onPress: handlePiPress,
       },
       {
         operator: operator,
         value: "e",
-        onPress: handleEPress
+        onPress: handleEPress,
       },
       {
         operator: operator,
