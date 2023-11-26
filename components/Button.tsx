@@ -1,12 +1,14 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Operator } from "../hooks/useCalculation";
 
 interface IButton {
   value: string;
   style?: "secondary" | "accent" | "double";
+  operator?: Operator;
   onPress: () => void;
 }
-const Button = ({ value, style, onPress }: IButton) => {
+const Button = ({ operator, value, style, onPress }: IButton) => {
   const btnStyles: any[] = [styles.btn, { flex: 1, height: "100%" }];
   const txtStyles: any[] = [styles.btnText];
   if (style === "secondary") {
@@ -18,6 +20,17 @@ const Button = ({ value, style, onPress }: IButton) => {
   }
   return (
     <TouchableOpacity style={[btnStyles]} onPress={onPress}>
+      {operator && operator === value && (
+        <View
+          style={{
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0,0,0,0.4) ",
+          }}
+        ></View>
+      )}
+
       <Text style={txtStyles}>{value}</Text>
     </TouchableOpacity>
   );
@@ -32,6 +45,7 @@ const styles = StyleSheet.create({
   btn: {
     backgroundColor: "#333333",
     flex: 1,
+    position: "relative",
     alignItems: "center",
     justifyContent: "center",
   },

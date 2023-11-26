@@ -19,6 +19,7 @@ export default function Portrait() {
     handlePaste,
     handleOperatorPress,
     handleCopy,
+    operator,
   } = useCalculation();
 
   return (
@@ -64,58 +65,119 @@ export default function Portrait() {
       </View>
 
       <Row>
-        <Button value="C" style="secondary" onPress={handleClearPress} />
         <Button
+          operator={operator}
+          value="C"
+          style="secondary"
+          onPress={handleClearPress}
+        />
+        <Button
+          operator={operator}
           value={Operator.ToggleSign}
           style="secondary"
           onPress={() => handleOperatorPress(Operator.ToggleSign)}
         />
         <Button
+          operator={operator}
           value={Operator.Division100}
           style="secondary"
           onPress={() => handleOperatorPress(Operator.Division100)}
         />
         <Button
+          operator={operator}
           value={Operator.Division}
           style="accent"
           onPress={() => handleOperatorPress(Operator.Division)}
         />
       </Row>
       <Row>
-        <Button value="7" onPress={() => handleNumberPress("7")} />
-        <Button value="8" onPress={() => handleNumberPress("8")} />
-        <Button value="9" onPress={() => handleNumberPress("9")} />
         <Button
+          operator={operator}
+          value="7"
+          onPress={() => handleNumberPress("7")}
+        />
+        <Button
+          operator={operator}
+          value="8"
+          onPress={() => handleNumberPress("8")}
+        />
+        <Button
+          operator={operator}
+          value="9"
+          onPress={() => handleNumberPress("9")}
+        />
+        <Button
+          operator={operator}
           value={Operator.Multiplication}
           style="accent"
           onPress={() => handleOperatorPress(Operator.Multiplication)}
         />
       </Row>
       <Row>
-        <Button value="4" onPress={() => handleNumberPress("4")} />
-        <Button value="5" onPress={() => handleNumberPress("5")} />
-        <Button value="6" onPress={() => handleNumberPress("6")} />
         <Button
+          operator={operator}
+          value="4"
+          onPress={() => handleNumberPress("4")}
+        />
+        <Button
+          operator={operator}
+          value="5"
+          onPress={() => handleNumberPress("5")}
+        />
+        <Button
+          operator={operator}
+          value="6"
+          onPress={() => handleNumberPress("6")}
+        />
+        <Button
+          operator={operator}
           value={Operator.Subtraction}
           style="accent"
           onPress={() => handleOperatorPress(Operator.Subtraction)}
         />
       </Row>
       <Row>
-        <Button value="1" onPress={() => handleNumberPress("1")} />
-        <Button value="2" onPress={() => handleNumberPress("2")} />
-        <Button value="3" onPress={() => handleNumberPress("3")} />
         <Button
+          operator={operator}
+          value="1"
+          onPress={() => handleNumberPress("1")}
+        />
+        <Button
+          operator={operator}
+          value="2"
+          onPress={() => handleNumberPress("2")}
+        />
+        <Button
+          operator={operator}
+          value="3"
+          onPress={() => handleNumberPress("3")}
+        />
+        <Button
+          operator={operator}
           value={Operator.Addition}
           style="accent"
           onPress={() => handleOperatorPress(Operator.Addition)}
         />
       </Row>
       <Row>
-        <Button value="0" onPress={() => handleNumberPress("0")} />
-        <Button value="." onPress={handleDecimalPress} />
-        <Button value="Paste" style="accent" onPress={handlePaste} />
-        <Button value="=" style="accent" onPress={handleEqualsPress} />
+        <Button
+          operator={operator}
+          value="0"
+          onPress={() => handleNumberPress("0")}
+        />
+        <Button operator={operator} value="." onPress={handleDecimalPress} />
+        <Button
+          operator={operator}
+          value="Paste"
+          style="accent"
+          onPress={handlePaste}
+        />
+        <Button
+          operator={operator}
+          value="="
+          style="accent"
+          onPress={handleEqualsPress}
+        />
       </Row>
     </View>
   );
