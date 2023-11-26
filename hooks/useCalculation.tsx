@@ -10,6 +10,9 @@ export enum Operator {
   Division100 = "%",
   ToggleSign = "+/-",
   Empty = "",
+  Sin = "sin",
+  Cos = "cos",
+  Tan = "tan",
 }
 
 const useCalculation = () => {
@@ -89,6 +92,84 @@ const useCalculation = () => {
     setOperator(Operator.Empty);
     setStoredValue("");
   };
+  const handleTrigPress = (trigFunction: Operator) => {
+    const currentValue = parseFloat(display);
+    let result = 0;
+    switch (trigFunction) {
+      case Operator.Sin:
+        result = Math.sin(currentValue);
+        break;
+      case Operator.Cos:
+        result = Math.cos(currentValue);
+        break;
+      case Operator.Tan:
+        result = Math.tan(currentValue);
+        break;
+      default:
+        break;
+    }
+    setDisplay(result.toString());
+  };
+
+  const handleLogPress = () => {
+    const currentValue = parseFloat(display);
+    const result = Math.log10(currentValue);
+    setDisplay(result.toString());
+  };
+
+  const handleLnPress = () => {
+    const currentValue = parseFloat(display);
+    const result = Math.log(currentValue);
+    setDisplay(result.toString());
+  };
+
+  const handleInversePress = () => {
+    const currentValue = parseFloat(display);
+    const result = 1 / currentValue;
+    setDisplay(result.toString());
+  };
+
+  const handleExponentialPress = () => {
+    const currentValue = parseFloat(display);
+    const result = Math.exp(currentValue);
+    setDisplay(result.toString());
+  };
+
+  const handleSquarePress = () => {
+    const currentValue = parseFloat(display);
+    const result = Math.pow(currentValue, 2);
+    setDisplay(result.toString());
+  };
+
+  const handlePowerPress = () => {
+    const currentValue = parseFloat(display);
+    const result = Math.pow(currentValue, parseFloat(storedValue));
+    setDisplay(result.toString());
+  };
+  const handleAbsolutePress = () => {
+    const currentValue = parseFloat(display);
+    const result = Math.abs(currentValue);
+    setDisplay(result.toString());
+  };
+
+  const handlePiPress = () => {
+    setDisplay(Math.PI.toString());
+  };
+
+  const handleEPress = () => {
+    setDisplay(Math.E.toString());
+  };
+  const handleRadPress = () => {
+    const currentValue = parseFloat(display);
+    const result = currentValue * (Math.PI / 180); // Convert degrees to radians
+    setDisplay(result.toString());
+  };
+
+  const handleSquareRootPress = () => {
+    const currentValue = parseFloat(display);
+    const result = Math.sqrt(currentValue);
+    setDisplay(result.toString());
+  };
 
   return {
     display:
@@ -105,6 +186,18 @@ const useCalculation = () => {
     handleOperatorPress,
     handleEqualsPress,
     handleClearPress,
+    handleTrigPress,
+    handleLogPress,
+    handleLnPress,
+    handleInversePress,
+    handleExponentialPress,
+    handleSquarePress,
+    handlePowerPress,
+    handleAbsolutePress,
+    handlePiPress,
+    handleEPress,
+    handleRadPress,
+    handleSquareRootPress,
   };
 };
 

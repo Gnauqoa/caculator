@@ -1,12 +1,10 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import Button from "../../../components/Button";
 import useCalculation, { Operator } from "../../../hooks/useCalculation";
 import { AntDesign } from "@expo/vector-icons";
 import Row from "../../../components/Row";
-
-
 
 export default function Portrait() {
   const {
@@ -181,63 +179,3 @@ export default function Portrait() {
     </View>
   );
 }
-
-const BTN_MARGIN = 5;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#202020",
-    flexDirection: "column",
-  },
-  containerLandscape: {
-    flexDirection: "row",
-  },
-
-  computedValue: {
-    color: "#fff",
-    fontSize: 40,
-    textAlign: "right",
-    marginRight: 20,
-    marginBottom: 10,
-  },
-
-  row: {
-    flexDirection: "row",
-  },
-  btnText: {
-    color: "#fff",
-    fontSize: 25,
-    fontWeight: "500",
-  },
-
-  btn: {
-    backgroundColor: "#333333",
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    margin: BTN_MARGIN,
-    borderRadius: 100,
-  },
-  btn2: {
-    backgroundColor: "#333333",
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    margin: BTN_MARGIN,
-    borderRadius: 100,
-  },
-  btnSecondary: {
-    backgroundColor: "#a6a6a6",
-  },
-  btnTextSecondary: {
-    color: "#060606",
-  },
-  btnAccent: {
-    backgroundColor: "#f09a36",
-  },
-  btnDouble: {
-    alignItems: "flex-start",
-    flex: 0,
-  },
-});
