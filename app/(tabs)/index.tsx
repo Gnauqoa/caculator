@@ -16,10 +16,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
 import useHistory from "../../hooks/useHistory";
 import { StatusBar } from "expo-status-bar";
-
-const Row = ({ children }: { children: any }) => (
-  <View style={{ flex: 1, flexDirection: "row", gap: 4 }}>{children}</View>
-);
+import Row from "../../components/Row";
 
 export default function App() {
   const [displayValue, setDisplayValue] = useState("");
@@ -76,7 +73,6 @@ export default function App() {
               paddingHorizontal: 20,
               textAlign: "center",
               zIndex: 10,
-              
             }}
             value={displayValue}
             onChange={handleChange}

@@ -4,10 +4,9 @@ import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import Button from "../../../components/Button";
 import useCalculation, { Operator } from "../../../hooks/useCalculation";
 import { AntDesign } from "@expo/vector-icons";
+import Row from "../../../components/Row";
 
-const Row = ({ children }: { children: any }) => (
-  <View style={{ flex: 1, flexDirection: "row", gap: 4 }}>{children}</View>
-);
+
 
 export default function Portrait() {
   const {
