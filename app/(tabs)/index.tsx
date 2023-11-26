@@ -1,7 +1,6 @@
 import * as ScreenOrientation from "expo-screen-orientation";
 import React, { useState } from "react";
 import {
-  StatusBar,
   StyleSheet,
   View,
   SafeAreaView,
@@ -16,6 +15,7 @@ import { useClipboard } from "../../hooks/useClipboard";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
 import useHistory from "../../hooks/useHistory";
+import { StatusBar } from "expo-status-bar";
 
 const Row = ({ children }: { children: any }) => (
   <View style={styles.row}>{children}</View>
@@ -64,7 +64,7 @@ export default function App() {
             : null,
         ]}
       >
-        <StatusBar />
+        <StatusBar style="dark" />
         <SafeAreaView style={{ width: "100%" }}>
           <View style={{ position: "relative", width: "100%" }}>
             <TextInput

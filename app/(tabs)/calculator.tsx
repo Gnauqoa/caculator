@@ -1,4 +1,3 @@
-import * as ScreenOrientation from "expo-screen-orientation";
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, SafeAreaView, Text, ScrollView } from "react-native";
@@ -88,7 +87,7 @@ export default function Calculator() {
     <ScrollView
       style={[styles.container, isLandscape ? null : styles.containerLandscape]}
     >
-      <StatusBar style="light" />
+      <StatusBar style="dark" />
       <SafeAreaView style={{ width: "100%" }}>
         <Text style={styles.computedValue}>{displayValue}</Text>
 

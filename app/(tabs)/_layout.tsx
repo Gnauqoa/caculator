@@ -32,7 +32,7 @@ export default function TabLayout() {
             <TabBarIcon name="code" color={focused ? "#f09a36" : color} />
           ),
           headerRight: () => (
-            <Link href="/history" asChild>
+            <Link href="/History" asChild>
               <Pressable>
                 {({ pressed }) => (
                   <MaterialIcons
@@ -60,7 +60,7 @@ export default function TabLayout() {
           ),
           tabBarActiveTintColor: "#f09a36",
           headerRight: () => (
-            <Link href="/history" asChild>
+            <Link href="/History" asChild>
               <Pressable>
                 {({ pressed }) => (
                   <MaterialIcons

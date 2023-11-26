@@ -1,12 +1,7 @@
 import { StatusBar } from "expo-status-bar";
-import {
-  Platform,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 
-import { Text, View } from "../components/Themed";
+import { Text } from "../components/Themed";
 import { useContext } from "react";
 import { HistoryContext } from "../context/history";
 import { HistoryRow } from "../components/History";
@@ -17,6 +12,7 @@ export default function ModalScreen() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <StatusBar style="dark" />
       <Text style={styles.title}>History</Text>
 
       {calculationHistories.length === 0 ? (
@@ -44,14 +40,13 @@ export default function ModalScreen() {
           ))}
         </>
       )}
-
-      <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "#202020",
     flexGrow: 1,
     alignItems: "center",
     paddingVertical: 20,
@@ -59,6 +54,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
+    color: "#fff",
     fontWeight: "bold",
   },
   separator: {
