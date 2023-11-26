@@ -1,12 +1,5 @@
-import * as ScreenOrientation from "expo-screen-orientation";
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  useWindowDimensions,
-} from "react-native";
-const BTN_MARGIN = 5;
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
 interface IButton {
   value: string;
@@ -14,19 +7,7 @@ interface IButton {
   onPress: () => void;
 }
 const Button = ({ value, style, onPress }: IButton) => {
-  const { height, width } = useWindowDimensions();
-  const isLandScape = true;
-  const buttonWidth = isLandScape
-    ? width / 4 - BTN_MARGIN * 2
-    : width / 4 - BTN_MARGIN * 2;
-  const buttonHeight = isLandScape
-    ? height / 9 - BTN_MARGIN * 2
-    : height / 8 - BTN_MARGIN * 2;
-
-  const btnStyles: any[] = [
-    styles.btn,
-    { width: buttonWidth, height: buttonHeight },
-  ];
+  const btnStyles: any[] = [styles.btn, { flex: 1, height: "100%" }];
   const txtStyles: any[] = [styles.btnText];
   if (style === "secondary") {
     btnStyles.push(styles.btnSecondary);
@@ -53,8 +34,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    margin: BTN_MARGIN,
-    borderRadius: 100,
   },
   btnSecondary: {
     backgroundColor: "#a6a6a6",

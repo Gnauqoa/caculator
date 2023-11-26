@@ -64,7 +64,7 @@ export default function App() {
             : null,
         ]}
       >
-        {/* <StatusBar style="dark" /> */}
+        <StatusBar style="dark" />
         <SafeAreaView style={{ width: "100%" }}>
           <View style={{ position: "relative", width: "100%" }}>
             <TextInput
