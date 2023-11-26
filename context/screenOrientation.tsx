@@ -29,6 +29,7 @@ export const ScreenOrientationProvider = ({
 }) => {
   const [mode, setMode] = useState(ScreenOrientation.Orientation.PORTRAIT_UP);
   const [loading, setLoading] = useState(true);
+
   const init = async () => {
     const currentMode = await ScreenOrientation.getOrientationAsync();
     setMode(currentMode);
@@ -44,11 +45,14 @@ export const ScreenOrientationProvider = ({
   };
   const handlePortrait = () => {
     ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
-    setMode(ScreenOrientation.Orientation.PORTRAIT_DOWN);
+    setMode(ScreenOrientation.Orientation.PORTRAIT_UP);
   };
   useEffect(() => {
     init();
   }, []);
+  useEffect(() => {
+    console.log({ mode, Orientation: ScreenOrientation.Orientation });
+  }, [mode]);
   return (
     <ScreenOrientationContext.Provider
       value={{
@@ -58,7 +62,7 @@ export const ScreenOrientationProvider = ({
         handleLandscape,
         handlePortrait,
         isLandscape: mode === ScreenOrientation.Orientation.LANDSCAPE_LEFT,
-        isPortrait: mode === ScreenOrientation.Orientation.PORTRAIT_DOWN,
+        isPortrait: mode === ScreenOrientation.Orientation.PORTRAIT_UP,
       }}
     >
       {children}
