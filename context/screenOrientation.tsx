@@ -39,12 +39,16 @@ export const ScreenOrientationProvider = ({
     if (mode === ScreenOrientation.Orientation.PORTRAIT_UP) handleLandscape();
     else handlePortrait();
   };
-  const handleLandscape = () => {
-    ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
+  const handleLandscape = async () => {
+    await ScreenOrientation.lockAsync(
+      ScreenOrientation.OrientationLock.LANDSCAPE
+    );
     setMode(ScreenOrientation.Orientation.LANDSCAPE_LEFT);
   };
-  const handlePortrait = () => {
-    ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
+  const handlePortrait = async () => {
+    await ScreenOrientation.lockAsync(
+      ScreenOrientation.OrientationLock.PORTRAIT_UP
+    );
     setMode(ScreenOrientation.Orientation.PORTRAIT_UP);
   };
   useEffect(() => {
