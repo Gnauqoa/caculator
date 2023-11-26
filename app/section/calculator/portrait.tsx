@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, SafeAreaView, Text, ScrollView } from "react-native";
-import useHistory from "../../../hooks/useHistory";
-import { useClipboard } from "../../../hooks/useClipboard";
 import useScreenOrientation from "../../../hooks/useScreenOrientation";
 import Button from "../../../components/Button";
-import useCalculation from "../../../hooks/useCalculation";
+import useCalculation, { Operator } from "../../../hooks/useCalculation";
 
 const Row = ({ children }: { children: any }) => (
   <View style={styles.row}>{children}</View>
@@ -37,17 +35,17 @@ export default function Portrait() {
           <Button
             value="+/-"
             style="secondary"
-            onPress={() => handleOperatorPress("+/-")}
+            onPress={() => handleOperatorPress(Operator.ToggleSign)}
           />
           <Button
             value="%"
             style="secondary"
-            onPress={() => handleOperatorPress("%")}
+            onPress={() => handleOperatorPress(Operator.Division100)}
           />
           <Button
             value="/"
             style="accent"
-            onPress={() => handleOperatorPress("/")}
+            onPress={() => handleOperatorPress(Operator.Division)}
           />
         </Row>
         <Row>
@@ -57,7 +55,7 @@ export default function Portrait() {
           <Button
             value="x"
             style="accent"
-            onPress={() => handleOperatorPress("x")}
+            onPress={() => handleOperatorPress(Operator.Multiplication)}
           />
         </Row>
         <Row>
@@ -67,7 +65,7 @@ export default function Portrait() {
           <Button
             value="-"
             style="accent"
-            onPress={() => handleOperatorPress("-")}
+            onPress={() => handleOperatorPress(Operator.Subtraction)}
           />
         </Row>
         <Row>
@@ -77,7 +75,7 @@ export default function Portrait() {
           <Button
             value="+"
             style="accent"
-            onPress={() => handleOperatorPress("+")}
+            onPress={() => handleOperatorPress(Operator.Addition)}
           />
         </Row>
         <Row>
