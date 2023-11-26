@@ -55,7 +55,7 @@ function RootLayoutNav() {
       <ContextProvider>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="history" options={{ presentation: "modal" }} />
+          <Stack.Screen name="History" options={{ presentation: "modal" }} />
         </Stack>
       </ContextProvider>
     </ThemeProvider>

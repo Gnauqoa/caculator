@@ -5,83 +5,24 @@ import useHistory from "../../../hooks/useHistory";
 import { useClipboard } from "../../../hooks/useClipboard";
 import useScreenOrientation from "../../../hooks/useScreenOrientation";
 import Button from "../../../components/Button";
+import useCalculation from "../../../hooks/useCalculation";
 
 const Row = ({ children }: { children: any }) => (
   <View style={styles.row}>{children}</View>
 );
 
 export default function Portrait() {
-  const [displayValue, setDisplayValue] = useState("0");
-  const [operator, setOperator] = useState("");
-  const [storedValue, setStoredValue] = useState("");
-  const { addHistory } = useHistory();
-  const { copy, paste } = useClipboard();
+  const {
+    calculation,
+    handleClearPress,
+    handleDecimalPress,
+    handleEqualsPress,
+    handleNumberPress,
+    handleCopy,
+    handlePaste,
+    handleOperatorPress,
+  } = useCalculation();
   const { isLandscape, handleToggle } = useScreenOrientation();
-  const handleNumberPress = (value: string) => {
-    if (displayValue === "0") {
-      setDisplayValue(value);
-    } else {
-      setDisplayValue(displayValue + value);
-    }
-    if (parseFloat(displayValue) < 0) {
-      setDisplayValue("-" + displayValue);
-    }
-  };
-
-  const handleDecimalPress = () => {
-    if (!displayValue.includes(".")) {
-      setDisplayValue(displayValue + ".");
-    }
-  };
-
-  const handleOperatorPress = (value: string) => {
-    if (value === "%") {
-      const currentValue = parseFloat(displayValue);
-      const result = currentValue / 100;
-      setDisplayValue(result.toString());
-    } else if (value === "+/-") {
-      setDisplayValue((parseFloat(displayValue) * -1).toString());
-    } else {
-      setOperator(value);
-      setStoredValue(displayValue);
-      setDisplayValue("0");
-    }
-  };
-
-  const handleEqualsPress = () => {
-    const currentValue = parseFloat(displayValue);
-    const storedValueFloat = parseFloat(storedValue);
-    let result = 0;
-    switch (operator) {
-      case "+":
-        result = storedValueFloat + currentValue;
-        break;
-      case "-":
-        result = storedValueFloat - currentValue;
-        break;
-      case "x":
-        result = storedValueFloat * currentValue;
-        break;
-      case "/":
-        result = storedValueFloat / currentValue;
-        break;
-      default:
-        break;
-    }
-    addHistory({
-      calculation: `${storedValue}${operator}${currentValue}`,
-      result,
-    });
-    setDisplayValue(result.toString());
-    setOperator("");
-    setStoredValue("");
-  };
-
-  const handleClearPress = () => {
-    setDisplayValue("0");
-    setOperator("");
-    setStoredValue("");
-  };
 
   return (
     <ScrollView
@@ -89,7 +30,7 @@ export default function Portrait() {
     >
       <StatusBar style="dark" />
       <SafeAreaView style={{ width: "100%" }}>
-        <Text style={styles.computedValue}>{displayValue}</Text>
+        <Text style={styles.computedValue}>{calculation}</Text>
 
         <Row>
           <Button value="C" style="secondary" onPress={handleClearPress} />
@@ -145,8 +86,8 @@ export default function Portrait() {
           <Button value="=" style="accent" onPress={handleEqualsPress} />
         </Row>
         <Row>
-          <Button value="Paste" onPress={() => paste(setDisplayValue)} />
-          <Button value="Copy Result" onPress={() => copy(displayValue)} />
+          <Button value="Paste" onPress={handlePaste} />
+          <Button value="Copy Result" onPress={handleCopy} />
         </Row>
         <Row>
           <Button
