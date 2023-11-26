@@ -73,8 +73,10 @@ export default function App() {
               color: "#fff",
               width: "100%",
               fontSize: 40,
+              paddingHorizontal: 20,
               textAlign: "center",
               zIndex: 10,
+              
             }}
             value={displayValue}
             onChange={handleChange}
