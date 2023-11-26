@@ -50,9 +50,6 @@ export const ScreenOrientationProvider = ({
   useEffect(() => {
     init();
   }, []);
-  useEffect(() => {
-    console.log({ mode, Orientation: ScreenOrientation.Orientation });
-  }, [mode]);
   return (
     <ScreenOrientationContext.Provider
       value={{

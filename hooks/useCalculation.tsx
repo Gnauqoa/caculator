@@ -2,6 +2,13 @@ import { useState } from "react";
 import useHistory from "./useHistory";
 import { useClipboard } from "./useClipboard";
 
+export enum Operator {
+  Addition = "+",
+  Subtraction = "-",
+  Multiplication = "x",
+  Division = "/",
+}
+
 const useCalculation = () => {
   const [display, setDisplay] = useState("");
   const [operator, setOperator] = useState("");

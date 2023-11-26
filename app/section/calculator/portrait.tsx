@@ -13,7 +13,7 @@ const Row = ({ children }: { children: any }) => (
 
 export default function Portrait() {
   const {
-    calculation,
+    display,
     handleClearPress,
     handleDecimalPress,
     handleEqualsPress,
@@ -30,7 +30,7 @@ export default function Portrait() {
     >
       <StatusBar style="dark" />
       <SafeAreaView style={{ width: "100%" }}>
-        <Text style={styles.computedValue}>{calculation}</Text>
+        <Text style={styles.computedValue}>{display}</Text>
 
         <Row>
           <Button value="C" style="secondary" onPress={handleClearPress} />
