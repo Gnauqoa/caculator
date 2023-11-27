@@ -1,9 +1,9 @@
 import { AntDesign } from "@expo/vector-icons";
 import { SafeAreaView, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import useCalculation, { Operator } from "../../../hooks/useCalculation";
-import Button, { ButtonProps } from "../../../components/Button";
-import Row from "../../../components/Row";
+import useCalculation, { Operator } from "../../hooks/useCalculation";
+import Button, { ButtonProps } from "../../components/Button";
+import Row from "../../components/Row";
 
 const Landscape = () => {
   const {

@@ -1,10 +1,10 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { View, Text, TouchableOpacity } from "react-native";
-import Button from "../../../components/Button";
-import useCalculation, { Operator } from "../../../hooks/useCalculation";
+import Button from "../../components/Button";
+import useCalculation, { Operator } from "../../hooks/useCalculation";
 import { AntDesign } from "@expo/vector-icons";
-import Row from "../../../components/Row";
+import Row from "../../components/Row";
 
 export default function Portrait() {
   const {

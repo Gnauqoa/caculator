@@ -65,18 +65,20 @@ const useCalculation = () => {
         result,
       });
     } else {
-      setOperator(value);
       if (operator === Operator.Empty) {
         setStoredValue(display);
         setDisplay("0");
+      } else {
+        handleEqualsPress(false);
       }
+      setOperator(value);
     }
   };
 
-  const handleEqualsPress = () => {
-    const currentValue = parseFloat(display);
-    const storedValueFloat = parseFloat(storedValue);
-    let result = 0;
+  const handleEqualsPress = (clearOperator: boolean = true): void => {
+    const currentValue: number = parseFloat(display);
+    const storedValueFloat: number = parseFloat(storedValue);
+    let result: number = 0;
     let c_operator: string = operator;
     switch (c_operator) {
       case Operator.Addition:
@@ -103,7 +105,7 @@ const useCalculation = () => {
       result,
     });
     setDisplay(result.toString());
-    setOperator(Operator.Empty);
+    if (clearOperator) setOperator(Operator.Empty);
     setStoredValue("");
   };
 
