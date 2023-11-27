@@ -72,6 +72,8 @@ export default function App() {
               fontSize: 40,
               paddingHorizontal: 20,
               textAlign: "center",
+              borderBottomWidth: 1,
+              borderBottomColor: "#fff",
               zIndex: 10,
             }}
             value={displayValue}
