@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { TouchableOpacity, useColorScheme } from "react-native";
 import ContextProvider from "../context";
 import { AntDesign } from "@expo/vector-icons";
+import Colors from "../constants/Colors";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -50,7 +51,6 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
-
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <ContextProvider>
@@ -62,7 +62,11 @@ function RootLayoutNav() {
               headerLeft: () => (
                 <TouchableOpacity>
                   <Link href="../">
-                    <AntDesign name="back" size={25} color="white" />
+                    <AntDesign
+                      name="back"
+                      size={25}
+                      color={Colors[colorScheme ?? "light"].text}
+                    />
                   </Link>
                 </TouchableOpacity>
               ),

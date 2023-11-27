@@ -28,7 +28,7 @@ export default function TabLayout() {
               style={{ marginLeft: 15 }}
               name="screen-rotation"
               size={25}
-              color="white"
+              color={Colors[colorScheme ?? "light"].text}
             />
           </TouchableOpacity>
         ),
