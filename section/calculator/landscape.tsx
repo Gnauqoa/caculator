@@ -256,6 +256,7 @@ const Landscape = () => {
               color: "#fff",
               fontSize: 40,
               textAlign: "right",
+              marginLeft: "auto",
             }}
           >
             {display}
