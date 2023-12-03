@@ -1,4 +1,4 @@
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, Feather } from "@expo/vector-icons";
 import { SafeAreaView, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import useCalculation, { Operator } from "../../hooks/useCalculation";
@@ -8,6 +8,7 @@ import Row from "../../components/Row";
 const Landscape = () => {
   const {
     display,
+    handleDelete,
     handleCopy,
     handlePaste,
     handleNumberPress,
@@ -244,6 +245,10 @@ const Landscape = () => {
             paddingRight: 20,
             position: "relative",
             width: "100%",
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 16,
           }}
         >
           <Text
@@ -255,6 +260,9 @@ const Landscape = () => {
           >
             {display}
           </Text>
+          <TouchableOpacity onPress={handleDelete}>
+            <Feather name="delete" size={24} color="white" />
+          </TouchableOpacity>
           <View
             style={{
               zIndex: 20,

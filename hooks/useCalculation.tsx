@@ -22,7 +22,9 @@ const useCalculation = () => {
   const [storedValue, setStoredValue] = useState("");
   const { addHistory } = useHistory();
   const { copy, paste } = useClipboard();
-
+  const handleDelete = () => {
+    setDisplay(display.slice(0, -1));
+  };
   const handleCopy = () => copy(display);
   const handlePaste = () => paste(setDisplay);
   const handleCubeRootPress = () => {
@@ -217,6 +219,7 @@ const useCalculation = () => {
         ? display
         : storedValue,
     operator,
+    handleDelete,
     handleCopy,
     handlePaste,
     handleNumberPress,

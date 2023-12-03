@@ -3,7 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { View, Text, TouchableOpacity } from "react-native";
 import Button from "../../components/Button";
 import useCalculation, { Operator } from "../../hooks/useCalculation";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, Feather } from "@expo/vector-icons";
 import Row from "../../components/Row";
 
 export default function Portrait() {
@@ -16,6 +16,7 @@ export default function Portrait() {
     handlePaste,
     handleOperatorPress,
     handleCopy,
+    handleDelete,
     operator,
   } = useCalculation();
 
@@ -36,10 +37,15 @@ export default function Portrait() {
           paddingRight: 20,
           position: "relative",
           width: "100%",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          gap: 16,
         }}
       >
         <Text
           style={{
+            marginLeft: "auto",
             color: "#fff",
             fontSize: 40,
             textAlign: "right",
@@ -47,6 +53,9 @@ export default function Portrait() {
         >
           {display}
         </Text>
+        <TouchableOpacity onPress={handleDelete}>
+          <Feather name="delete" size={24} color="white" />
+        </TouchableOpacity>
         <View
           style={{
             zIndex: 20,
