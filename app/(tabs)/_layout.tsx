@@ -1,7 +1,6 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Link, Tabs } from "expo-router";
 import { Pressable, TouchableOpacity, useColorScheme } from "react-native";
-
 import Colors from "../../constants/Colors";
 import { Entypo, MaterialIcons } from "@expo/vector-icons";
 import useScreenOrientation from "../../hooks/useScreenOrientation";
